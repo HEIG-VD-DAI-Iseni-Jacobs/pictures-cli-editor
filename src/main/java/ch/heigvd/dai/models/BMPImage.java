@@ -4,8 +4,9 @@ import java.io.*;
 
 /** We support only BMPImage as it's one of the easiest way to store pictures. */
 public class BMPImage {
-  private byte[] header;
-  private byte[] image;
+
+  private BMPHeader header;  // TODO : create a BMPHeader class ?
+  private byte[][] image;
   private final String inputPath;
   private final String outputPath;
 
@@ -22,15 +23,12 @@ public class BMPImage {
 
   /**
    * Reads an image from the specified file path.
-   *
-   */
+   * */
   public void readImage() {
+    header.readHeader(inputPath);
+
     try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputPath))) {
-      byte b;
-      while ((b = (byte) bis.read()) != -1) {
-        System.out.println(b);
-        // TODO
-      }
+
     } catch (IOException e) {
       System.err.println("[e]: Error reading image: '" + e.getMessage() + "'");
     }
@@ -41,14 +39,14 @@ public class BMPImage {
    *
    * @throws RuntimeException if the image cannot be written in the specified format
    */
-  //  public void writeImage() {
-  //    try (OutputStream imageFile = new FileOutputStream(outputPath)) {
-  //      if (!ImageIO.write(image, format, imageFile)) {
-  //        throw new RuntimeException("Failed to write the image in the specified format: " +
-  // format);
-  //      }
-  //    } catch (Exception e) {
-  //      System.err.println("Error writing image: " + outputPath);
-  //    }
-  //  }
+    public void writeImage() {
+      try (OutputStream imageFile = new FileOutputStream(outputPath)) {
+        if (!ImageIO.write(image, format, imageFile)) {
+          throw new RuntimeException("Failed to write the image in the specified format: " +
+   format);
+        }
+      } catch (Exception e) {
+        System.err.println("Error writing image: " + outputPath);
+      }
+    }
 }
