@@ -1,56 +1,78 @@
 package ch.heigvd.dai.models;
 
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
+/**
+ * Handles reading a BMP header, extracting its data and writing to a new file.
+ *
+ * @author Jacobs Arthur
+ * @author Iseni Aladin
+ */
 public class BMPHeader {
-    /** Size of the fixed header */
-    public static final int HEADER_LENGTH = 14;
-    /** Index of the value "data offset" in a BMP header */
-    public static final int DATA_OFFSET_INDEX = 5;
+  /** Size of the fixed header */
+  private static final int HEADER_LENGTH = 14;
 
-    /** The BITMAPFILEHEADER, a fixed-size header for BMP */
-    private byte[] fileHeader = new byte[14];
-    /** The BITMAPINFOHEADER, a variable-size header coming after the BITMAPFILEHEADER */
-    private byte[] infoHeader;
+  /** Index of the value "data offset" in a BMP header */
+  private static final int DATA_OFFSET_INDEX = 10;
 
-    /**
-     * Read a BMP header : both the fixed header and
-     * @param inputPath the path of the image file to load
-     */
-    public void readHeader(String inputPath) {
-        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputPath))) {
-            byte b;
+  /** The BITMAPFILEHEADER, a fixed-size header for BMP */
+  private final byte[] fileHeader = new byte[HEADER_LENGTH];
 
-            // Read the fixed header
-            int i = 0;
-            bis.read(fileHeader, 0, 14);
-            while ((b = (byte) bis.read()) != -1 && i < HEADER_LENGTH) {
-                fileHeader[i++] = b;
-            }
+  /** The BITMAPINFOHEADER, a variable-size header coming after the BITMAPFILEHEADER */
+  private byte[] infoHeader;
 
-            // Read the rest of the metadata
-            int dataOffset = getDataOffset();
-            while ((b = (byte) bis.read()) != -1 && i < dataOffset) {
-                infoHeader.add(b);
-            }
-        } catch (IOException e) {
-            System.err.println("[e]: Error reading image: '" + e.getMessage() + "'");
-        }
+  /**
+   * Read a BMP header : both the fixed-size header and variable-size header
+   *
+   * @param bis the buffered input stream to read from
+   */
+  public void readHeader(BufferedInputStream bis) throws IOException {
+    int bytesRead;
+
+    // Read the fixed header
+    bytesRead = bis.read(fileHeader, 0, HEADER_LENGTH);
+    if (bytesRead != HEADER_LENGTH) {
+      throw new IOException("Failed to read all the fixed header's data");
     }
 
-    public void writeHeader(String outputPath) {
-        // TODO : write fixed header and variable header
+    int infoheaderLength = getDataOffset() - HEADER_LENGTH;
+    infoHeader = new byte[infoheaderLength];
+
+    // Read the rest of the metadata
+    bytesRead = bis.read(infoHeader, 0, infoheaderLength);
+    if (bytesRead != infoheaderLength) {
+      throw new IOException("Failed to read all the variable header's data");
+    }
+  }
+
+  public int getDataOffset() {
+    if (fileHeader.length != 14) {
+      System.err.println("[e]: Error, try to access dataOffset value before reading it");
+      return -1;
     }
 
-    private int getDataOffset() {
-        if (fileHeader.length != 14) {
-            System.err.println("[e]: Error, try to access dataOffset value before reading it");
-            return -1;
-        }
+    return ((fileHeader[DATA_OFFSET_INDEX + 3] & 0xFF) << 24)
+        | ((fileHeader[DATA_OFFSET_INDEX + 2] & 0xFF) << 16)
+        | ((fileHeader[DATA_OFFSET_INDEX + 1] & 0xFF) << 8)
+        | (fileHeader[DATA_OFFSET_INDEX] & 0xFF);
+  }
 
-        return fileHeader[DATA_OFFSET_INDEX];
+  public void writeHeader(BufferedOutputStream bos) throws IOException {
+    bos.write(fileHeader);
+    bos.write(infoHeader);
+  }
+
+  public int getImageWidth() {
+    if (fileHeader.length != 14) {
+      System.err.println("[e]: Error, try to access dataOffset value before reading it");
+      return -1;
     }
+
+    return ((infoHeader[4 + 3] & 0xFF) << 24)
+        | ((infoHeader[4 + 2] & 0xFF) << 16)
+        | ((infoHeader[4 + 1] & 0xFF) << 8)
+        | (infoHeader[4] & 0xFF);
+  }
 }
