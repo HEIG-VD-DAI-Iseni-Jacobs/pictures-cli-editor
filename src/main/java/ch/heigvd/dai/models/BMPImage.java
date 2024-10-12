@@ -30,6 +30,8 @@ public class BMPImage {
       System.out.println("Width: " + header.getImageWidth());
     } catch (IOException e) {
       System.err.println("[e]: Error reading image: '" + e.getMessage() + "'");
+    } catch (RuntimeException e) {
+      System.err.println("[e]: Invalid values: '" + e.getMessage() + "'");
     }
   }
 

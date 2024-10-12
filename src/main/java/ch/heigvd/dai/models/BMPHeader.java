@@ -11,6 +11,9 @@ import java.io.IOException;
  * @author Iseni Aladin
  */
 public class BMPHeader {
+  /** Magic identifier of BMP files */
+  private static final int BMP_MAGIC = 0x424D;
+
   /** Size of the fixed header */
   private static final int HEADER_LENGTH = 14;
 
@@ -36,6 +39,9 @@ public class BMPHeader {
     if (bytesRead != HEADER_LENGTH) {
       throw new IOException("Failed to read all the fixed header's data");
     }
+    if (getMagic() != BMP_MAGIC) {
+      throw new RuntimeException("The file type is not bmp, thus it is not supported");
+    }
 
     int infoheaderLength = getDataOffset() - HEADER_LENGTH;
     infoHeader = new byte[infoheaderLength];
@@ -47,10 +53,20 @@ public class BMPHeader {
     }
   }
 
+  private int getMagic() {
+    return (fileHeader[0] << 8 | fileHeader[1]);
+  }
+
+  /**
+   * If we correctly read a BMP header, return the dataOffset value (the number of bytes before the actual pixels
+   * are stored)
+   *
+   * @return pixel offset
+   */
   public int getDataOffset() {
-    if (fileHeader.length != 14) {
-      System.err.println("[e]: Error, try to access dataOffset value before reading it");
-      return -1;
+    // Check we read a BMP before
+    if (getMagic() != BMP_MAGIC) {
+      throw new RuntimeException("Error, try to access dataOffset value before reading it");
     }
 
     return ((fileHeader[DATA_OFFSET_INDEX + 3] & 0xFF) << 24)
