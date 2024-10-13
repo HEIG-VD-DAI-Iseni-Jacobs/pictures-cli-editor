@@ -6,6 +6,6 @@ public class Main {
   public static void main(String[] args) {
     BMPImage a = new BMPImage(args[0], args[1]);
     a.readImage();
-    a.writeImage();
+    //a.writeImage();
   }
 }
