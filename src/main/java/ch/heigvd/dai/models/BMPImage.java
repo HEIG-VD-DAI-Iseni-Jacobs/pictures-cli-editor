@@ -6,7 +6,7 @@ import java.io.*;
 public class BMPImage {
 
   private BMPHeader header;
-  private byte[][] image;
+  private Pixel[][] image;
   private final String inputPath;
   private final String outputPath;
 
@@ -26,13 +26,33 @@ public class BMPImage {
     try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputPath))) {
       header = new BMPHeader();
       header.readHeader(bis);
+      int width = header.getImageWidth();
+      int height = header.getImageHeight();
 
-      // TODO : read the pixels
+      image = new Pixel[width][height];
+      int red;
+      int green;
+      int blue;
+      for (int w = 0; w < width; w++) {
+        for (int h = 0; h < height; h++) {
+          red = bis.read();
+          green = bis.read();
+          blue = bis.read();
+          if (blue == -1 || green == -1 || red == -1) {
+            throw new IOException("Unexpected end of pixel data");
+          }
+          image[w][h] = new Pixel(red, green, blue);
+        }
+      }
     } catch (IOException e) {
       System.err.println("[e]: Error reading image: '" + e.getMessage() + "'");
     } catch (RuntimeException e) {
       System.err.println("[e]: Invalid values: '" + e.getMessage() + "'");
     }
+  }
+
+  public BMPHeader getHeader() {
+    return header;
   }
 
   // TODO : write to a new image

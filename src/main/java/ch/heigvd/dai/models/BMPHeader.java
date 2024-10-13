@@ -93,6 +93,22 @@ public class BMPHeader {
   }
 
   /**
+   * Read the image's height from the header
+   *
+   * @return image height
+   */
+  public int getImageHeight() {
+    if (infoHeader.length < 12) {
+      throw new RuntimeException("[e]: Error, header data is insufficient for reading the height.");
+    }
+
+    return ((infoHeader[8 + 3] & 0xFF) << 24)
+        | ((infoHeader[8 + 2] & 0xFF) << 16)
+        | ((infoHeader[8 + 1] & 0xFF) << 8)
+        | (infoHeader[8] & 0xFF);
+  }
+
+  /**
    * Read the image's width from the header
    *
    * @return image width
