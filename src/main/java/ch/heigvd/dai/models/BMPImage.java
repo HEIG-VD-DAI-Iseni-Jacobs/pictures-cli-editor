@@ -2,7 +2,7 @@ package ch.heigvd.dai.models;
 
 import java.io.*;
 
-/** We support only BMPImage as it's one of the easiest way to store pictures. */
+/** Supports BMP images for reading and writing. */
 public class BMPImage {
 
   private BMPHeader header;
@@ -10,8 +10,11 @@ public class BMPImage {
   private final String inputPath;
   private final String outputPath;
 
+  /** Stores any extra data after the pixel data */
+  private byte[] extraData;
+
   /**
-   * Constructs an ImageProcessor with the specified input path, output path, and format.
+   * Constructs a BMPImage with the specified input and output paths.
    *
    * @param inputPath the path of the image file to load
    * @param outputPath the path where the processed image will be saved
@@ -30,20 +33,28 @@ public class BMPImage {
       int height = header.getImageHeight();
 
       image = new Pixel[width][height];
-      int red;
-      int green;
-      int blue;
-      for (int w = 0; w < width; w++) {
-        for (int h = 0; h < height; h++) {
-          red = bis.read();
-          green = bis.read();
-          blue = bis.read();
+
+      for (int h = 0; h < height; h++) { // Iterate from top to bottom
+        for (int w = 0; w < width; w++) {
+          int blue = bis.read();
+          int green = bis.read();
+          int red = bis.read();
           if (blue == -1 || green == -1 || red == -1) {
             throw new IOException("Unexpected end of pixel data");
           }
-          image[w][h] = new Pixel(red, green, blue);
+          // Store pixels from bottom to top
+          image[w][height - 1 - h] = new Pixel(red, green, blue);
         }
       }
+
+      // Read any remaining data (extra data)
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      int nextByte;
+      while ((nextByte = bis.read()) != -1) {
+        baos.write(nextByte);
+      }
+      extraData = baos.toByteArray();
+
     } catch (IOException e) {
       System.err.println("[e]: Error reading image: '" + e.getMessage() + "'");
     } catch (RuntimeException e) {
@@ -55,13 +66,36 @@ public class BMPImage {
     return header;
   }
 
-  // TODO : write to a new image
   /** Writes the image to the specified output path. */
-  //    public void writeImage() {
-  //        try (OutputStream imageFile = new FileOutputStream(outputPath)) {
-  // TODO
-  //        } catch (Exception e) {
-  //            System.err.println("Error writing image: " + outputPath);
-  //        }
-  //    }
+  public void writeImage() {
+    try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputPath))) {
+      int width = header.getImageWidth();
+      int height = header.getImageHeight();
+
+      // Write the header
+      header.writeHeader(bos);
+
+      // Write pixel data
+      for (int h = height - 1; h >= 0; h--) { // Iterate from bottom to top
+        for (int w = 0; w < width; w++) {
+          Pixel pixel = image[w][h];
+          // Write bytes Blue, Green, Red
+          bos.write(pixel.getBlue());
+          bos.write(pixel.getGreen());
+          bos.write(pixel.getRed());
+        }
+      }
+
+      // Write any extra data after the pixel data
+      if (extraData != null && extraData.length > 0) {
+        bos.write(extraData);
+      }
+
+      bos.flush(); // Ensure all data is written
+      System.out.println("Image written successfully to " + outputPath);
+
+    } catch (IOException e) {
+      System.err.println("Error writing image: " + outputPath);
+    }
+  }
 }
