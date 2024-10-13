@@ -21,13 +21,13 @@ public class BMPImage {
     this.outputPath = outputPath;
   }
 
-  /** Reads an image from the specified file path. */
+  /** Reads an image from the specified input path. */
   public void readImage() {
     try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputPath))) {
       header = new BMPHeader();
       header.readHeader(bis);
-      System.out.println(header.getDataOffset());
-      System.out.println("Width: " + header.getImageWidth());
+
+      // TODO : read the pixels
     } catch (IOException e) {
       System.err.println("[e]: Error reading image: '" + e.getMessage() + "'");
     } catch (RuntimeException e) {
@@ -35,18 +35,12 @@ public class BMPImage {
     }
   }
 
-  /**
-   * Writes the image to the specified output path in the given format.
-   *
-   * @throws RuntimeException if the image cannot be written in the specified format
-   */
+
+  // TODO : write to a new image
+  /** Writes the image to the specified output path. */
   //    public void writeImage() {
   //        try (OutputStream imageFile = new FileOutputStream(outputPath)) {
-  //            if (!ImageIO.write(image, format, imageFile)) {
-  //                throw new RuntimeException("Failed to write the image in the specified format: "
-  // +
-  //                        format);
-  //            }
+  // TODO
   //        } catch (Exception e) {
   //            System.err.println("Error writing image: " + outputPath);
   //        }

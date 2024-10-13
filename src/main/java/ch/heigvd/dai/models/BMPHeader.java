@@ -30,6 +30,7 @@ public class BMPHeader {
    * Read a BMP header : both the fixed-size header and variable-size header
    *
    * @param bis the buffered input stream to read from
+   * @throws IOException if error while reading from stream
    */
   public void readHeader(BufferedInputStream bis) throws IOException {
     int bytesRead;
@@ -53,6 +54,11 @@ public class BMPHeader {
     }
   }
 
+  /**
+   * Read the Magic number from the header
+   *
+   * @return the file's magic number. Should be 0x424D as we're dealing with BMP
+   */
   private int getMagic() {
     return (fileHeader[0] << 8 | fileHeader[1]);
   }
@@ -61,7 +67,7 @@ public class BMPHeader {
    * If we correctly read a BMP header, return the dataOffset value (the number of bytes before the actual pixels
    * are stored)
    *
-   * @return pixel offset
+   * @return pixel data offset
    */
   public int getDataOffset() {
     // Check we read a BMP before
@@ -75,11 +81,22 @@ public class BMPHeader {
         | (fileHeader[DATA_OFFSET_INDEX] & 0xFF);
   }
 
+  /**
+   * Write the header to a new file
+   *
+   * @param bos stream to write to
+   * @throws IOException if error while writing to stream
+   */
   public void writeHeader(BufferedOutputStream bos) throws IOException {
     bos.write(fileHeader);
     bos.write(infoHeader);
   }
 
+  /**
+   * Read the image's width from the header
+   *
+   * @return image width
+   */
   public int getImageWidth() {
     if (fileHeader.length != 14) {
       System.err.println("[e]: Error, try to access dataOffset value before reading it");
