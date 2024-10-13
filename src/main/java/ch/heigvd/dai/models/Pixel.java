@@ -1,5 +1,6 @@
 package ch.heigvd.dai.models;
 
+/** Defines a pixel with 3 colors */
 public class Pixel {
   private int red;
   private int green;
