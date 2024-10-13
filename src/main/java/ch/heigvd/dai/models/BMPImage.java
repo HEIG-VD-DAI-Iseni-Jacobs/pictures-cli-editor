@@ -35,7 +35,6 @@ public class BMPImage {
     }
   }
 
-
   // TODO : write to a new image
   /** Writes the image to the specified output path. */
   //    public void writeImage() {

@@ -64,8 +64,8 @@ public class BMPHeader {
   }
 
   /**
-   * If we correctly read a BMP header, return the dataOffset value (the number of bytes before the actual pixels
-   * are stored)
+   * If we correctly read a BMP header, return the dataOffset value (the number of bytes before the
+   * actual pixels are stored)
    *
    * @return pixel data offset
    */
