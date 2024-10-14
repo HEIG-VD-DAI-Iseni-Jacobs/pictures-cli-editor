@@ -115,8 +115,7 @@ public class BMPHeader {
    */
   public int getImageWidth() {
     if (fileHeader.length != 14) {
-      System.err.println("Error, try to access dataOffset value before reading it");
-      return -1;
+      throw new RuntimeException("Error, try to access dataOffset value before reading it");
     }
 
     return ((infoHeader[4 + 3] & 0xFF) << 24)
