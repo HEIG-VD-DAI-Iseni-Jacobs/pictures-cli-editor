@@ -99,7 +99,7 @@ public class BMPHeader {
    */
   public int getImageHeight() {
     if (infoHeader.length < 12) {
-      throw new RuntimeException("[e]: Error, header data is insufficient for reading the height.");
+      throw new RuntimeException("Error, header data is insufficient for reading the height.");
     }
 
     return ((infoHeader[8 + 3] & 0xFF) << 24)
@@ -115,7 +115,7 @@ public class BMPHeader {
    */
   public int getImageWidth() {
     if (fileHeader.length != 14) {
-      System.err.println("[e]: Error, try to access dataOffset value before reading it");
+      System.err.println("Error, try to access dataOffset value before reading it");
       return -1;
     }
 

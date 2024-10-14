@@ -45,14 +45,10 @@ public class BMPImage {
       }
 
     } catch (IOException e) {
-      System.err.println("[e]: Error reading image: '" + e.getMessage() + "'");
+      System.err.println("Error reading image: '" + e.getMessage() + "'");
     } catch (RuntimeException e) {
-      System.err.println("[e]: Invalid values: '" + e.getMessage() + "'");
+      System.err.println("Invalid values: '" + e.getMessage() + "'");
     }
-  }
-
-  public BMPHeader getHeader() {
-    return header;
   }
 
   /** Writes the image to the specified output path. */
