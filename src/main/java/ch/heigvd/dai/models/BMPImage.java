@@ -10,9 +10,6 @@ public class BMPImage {
   private final String inputPath;
   private final String outputPath;
 
-  /** Stores any extra data after the pixel data */
-  private byte[] extraData;
-
   /**
    * Constructs a BMPImage with the specified input and output paths.
    *
@@ -47,14 +44,6 @@ public class BMPImage {
         }
       }
 
-      // Read any remaining data (extra data)
-      ByteArrayOutputStream baos = new ByteArrayOutputStream();
-      int nextByte;
-      while ((nextByte = bis.read()) != -1) {
-        baos.write(nextByte);
-      }
-      extraData = baos.toByteArray();
-
     } catch (IOException e) {
       System.err.println("[e]: Error reading image: '" + e.getMessage() + "'");
     } catch (RuntimeException e) {
@@ -67,35 +56,27 @@ public class BMPImage {
   }
 
   /** Writes the image to the specified output path. */
-//  public void writeImage() {
-//    try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputPath))) {
-//      int width = header.getImageWidth();
-//      int height = header.getImageHeight();
-//
-//      // Write the header
-//      header.writeHeader(bos);
-//
-//      // Write pixel data
-//      for (int h = height - 1; h >= 0; h--) { // Iterate from bottom to top
-//        for (int w = 0; w < width; w++) {
-//          Pixel pixel = image[w][h];
-//          // Write bytes Blue, Green, Red
-//          bos.write(pixel.getBlue());
-//          bos.write(pixel.getGreen());
-//          bos.write(pixel.getRed());
-//        }
-//      }
-//
-//      // Write any extra data after the pixel data
-//      if (extraData != null && extraData.length > 0) {
-//        bos.write(extraData);
-//      }
-//
-//      bos.flush(); // Ensure all data is written
-//      System.out.println("Image written successfully to " + outputPath);
-//
-//    } catch (IOException e) {
-//      System.err.println("Error writing image: " + outputPath);
-//    }
-//  }
+  public void writeImage() {
+    try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputPath))) {
+      int width = header.getImageWidth();
+      int height = header.getImageHeight();
+
+      header.writeHeader(bos);
+
+      // Write pixel data
+      for (int h = height - 1; h >= 0; h--) { // Iterate from bottom to top
+        for (int w = 0; w < width; w++) {
+          Pixel pixel = image[w][h];
+          // Write bytes Blue, Green, Red
+          bos.write(pixel.getBlue());
+          bos.write(pixel.getGreen());
+          bos.write(pixel.getRed());
+        }
+      }
+      bos.flush(); // Ensure pixels are written
+
+    } catch (IOException e) {
+      System.err.println("Error writing image: " + outputPath);
+    }
+  }
 }
