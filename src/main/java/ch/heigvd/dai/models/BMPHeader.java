@@ -93,14 +93,29 @@ public class BMPHeader {
   }
 
   /**
+   * Read the image's height from the header
+   *
+   * @return image height
+   */
+  public int getImageHeight() {
+    if (infoHeader.length < 12) {
+      throw new RuntimeException("Error, header data is insufficient for reading the height.");
+    }
+
+    return ((infoHeader[8 + 3] & 0xFF) << 24)
+        | ((infoHeader[8 + 2] & 0xFF) << 16)
+        | ((infoHeader[8 + 1] & 0xFF) << 8)
+        | (infoHeader[8] & 0xFF);
+  }
+
+  /**
    * Read the image's width from the header
    *
    * @return image width
    */
   public int getImageWidth() {
     if (fileHeader.length != 14) {
-      System.err.println("[e]: Error, try to access dataOffset value before reading it");
-      return -1;
+      throw new RuntimeException("Error, try to access dataOffset value before reading it");
     }
 
     return ((infoHeader[4 + 3] & 0xFF) << 24)
