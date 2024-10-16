@@ -75,4 +75,8 @@ public class BMPImage {
       System.err.println("[e] Error writing image: " + outputPath);
     }
   }
+
+  public Pixel[][] getImage() {
+    return image;
+  }
 }
