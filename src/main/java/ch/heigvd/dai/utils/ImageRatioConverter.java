@@ -4,7 +4,8 @@ import ch.heigvd.dai.models.ImageRatio;
 import picocli.CommandLine;
 
 /**
- * This class is used to convert the String format to 2 int in order to use them and to show errors in the terminal.
+ * This class is used to convert the String format to 2 int in order to use them and to show errors
+ * in the terminal.
  */
 public class ImageRatioConverter implements CommandLine.ITypeConverter<ImageRatio> {
   @Override
