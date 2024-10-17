@@ -21,6 +21,12 @@ public class BMPImage {
     this.outputPath = outputPath;
   }
 
+  public BMPImage(String inputPath, String outputPath, BMPHeader header) {
+    this(inputPath, outputPath);
+    this.image = new Pixel[header.getImageWidth()][header.getImageHeight()];
+    this.header = header;
+  }
+
   /** Reads an image from the specified input path. */
   public void readImage() {
     try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputPath))) {
@@ -82,6 +88,14 @@ public class BMPImage {
 
   public int getHeight() {
     return header.getImageHeight();
+  }
+
+  public Pixel getPixel(int x, int y) {
+    return image[x][y];
+  }
+
+  public void setPixel(int x, int y, Pixel pixel) {
+    image[x][y] = pixel;
   }
 
   public BMPHeader getHeader() {

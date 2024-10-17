@@ -1,14 +1,12 @@
 package ch.heigvd.dai.commands;
 
 import ch.heigvd.dai.models.BMPImage;
-import picocli.CommandLine;
-
 import java.util.concurrent.Callable;
+import picocli.CommandLine;
 
 @CommandLine.Command(name = "grey", description = "Convert a picture to black and white")
 public class Grey implements Callable<Integer> {
-  @CommandLine.ParentCommand
-  protected Root parent;
+  @CommandLine.ParentCommand protected Root parent;
 
   @Override
   public Integer call() {
@@ -22,7 +20,7 @@ public class Grey implements Callable<Integer> {
     BMPImage image = new BMPImage(parent.getInputPath(), parent.getOutputPath());
     image.readImage();
     // TODO
-    
+
     return 0;
   }
 }

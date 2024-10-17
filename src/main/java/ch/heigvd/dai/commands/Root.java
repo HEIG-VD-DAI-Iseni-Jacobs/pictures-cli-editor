@@ -5,10 +5,7 @@ import picocli.CommandLine;
 @CommandLine.Command(
     description = "A CLI tool to edit BMP pictures.",
     version = "1.0.0",
-    subcommands = {
-        Grey.class,
-        Blur.class
-    },
+    subcommands = {Grey.class, Blur.class, Crop.class},
     scope = CommandLine.ScopeType.INHERIT,
     mixinStandardHelpOptions = true)
 public class Root {
