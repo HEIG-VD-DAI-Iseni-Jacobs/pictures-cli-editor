@@ -7,7 +7,7 @@ public class ImageRatio {
 
   public ImageRatio(int widthRatio, int heightRatio) {
     if (widthRatio <= 0 || heightRatio <= 0) {
-      throw new IllegalArgumentException("Ratio values must be positive.");
+      throw new RuntimeException("Ratio values must be positive.");
     }
     this.widthRatio = widthRatio;
     this.heightRatio = heightRatio;

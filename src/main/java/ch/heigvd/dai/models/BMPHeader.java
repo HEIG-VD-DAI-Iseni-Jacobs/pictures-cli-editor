@@ -139,7 +139,7 @@ public class BMPHeader {
    */
   public void setImageHeight(int height) {
     if (height <= 0) {
-      throw new IllegalArgumentException("Image height must be positive.");
+      throw new RuntimeException("Image height must be positive.");
     }
 
     infoHeader[8] = (byte) (height & 0xFF);
@@ -155,7 +155,7 @@ public class BMPHeader {
    */
   public void setImageWidth(int width) {
     if (width <= 0) {
-      throw new IllegalArgumentException("Image width must be positive.");
+      throw new RuntimeException("Image width must be positive.");
     }
 
     infoHeader[4] = (byte) (width & 0xFF);
