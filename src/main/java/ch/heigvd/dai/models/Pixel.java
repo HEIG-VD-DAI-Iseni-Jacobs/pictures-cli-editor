@@ -50,10 +50,12 @@ public class Pixel {
    *
    * @param other the pixel whose color components are to be added to the current pixel
    */
-  public void add(Pixel other) {
+  public Pixel add(Pixel other) {
     this.red += other.red;
     this.blue += other.blue;
     this.green += other.green;
+
+    return this;
   }
 
   /**
@@ -61,9 +63,11 @@ public class Pixel {
    *
    * @param val the value to divide the pixel's color components by
    */
-  public void div(int val) {
+  public Pixel div(int val) {
     this.red /= val;
     this.green /= val;
     this.blue /= val;
+
+    return this;
   }
 }

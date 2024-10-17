@@ -65,8 +65,6 @@ public class Blur implements Callable<Integer> {
       }
     }
 
-    sum.div(counter);
-
-    return sum;
+    return sum.div(counter);
   }
 }
