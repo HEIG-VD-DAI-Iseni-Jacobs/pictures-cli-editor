@@ -9,6 +9,25 @@ import picocli.CommandLine;
 public class Blur implements Callable<Integer> {
   @CommandLine.ParentCommand protected Root parent;
 
+  @CommandLine.Spec private CommandLine.Model.CommandSpec spec;
+
+  // Private field to store the blur radius
+  private int radius;
+
+  /** Sets the radius of the blur effect. Default is 5 */
+  @CommandLine.Option(
+      names = {"-r", "--radius"},
+      description = "The radius of the blur, from 1 to 10 (Default: 5)",
+      defaultValue = "5")
+  public void setRadius(int radius) {
+    // Validate that the radius is within the acceptable range
+    if (radius < 1 || radius > 10) {
+      throw new CommandLine.ParameterException(
+          spec.commandLine(), "Radius must be between 1 and 10");
+    }
+    this.radius = radius;
+  }
+
   @Override
   public Integer call() {
     System.out.println(
@@ -50,8 +69,8 @@ public class Blur implements Callable<Integer> {
 
     Pixel sum = new Pixel(0, 0, 0);
 
-    for (int i = -7; i <= 7; i++) { // TODO : Arbitrary radius value
-      for (int j = -7; j <= 7; j++) {
+    for (int i = -radius; i <= radius; i++) {
+      for (int j = -radius; j <= radius; j++) {
         xoff = x + i;
         yoff = y + j;
 
