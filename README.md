@@ -1,6 +1,9 @@
 # Image Processing Application
 
-Welcome to the **Image Processing Application** project, developed as part of the **Web Application Development** course. This application allows users to modify image formats, convert images to black and white, and apply a blur effect. It is designed to be user-friendly while offering powerful image processing features.
+Welcome to the **Image Processing Application** project, developed as part of the [**Web Application Development
+**](https://github.com/heig-vd-dai-course) course. This CLI application allows users to modify image formats, convert
+images to black and white, and apply a blur effect. It is designed to be user-friendly while offering powerful image
+processing features.
 
 ## Table of Contents
 
@@ -12,9 +15,9 @@ Welcome to the **Image Processing Application** project, developed as part of th
 
 ## Features
 
-- **Image Ratio Modification**: Modifies the format ratio of your image. For exampe, if you insert a squared image, it can crop it to 4/5.
-- **Black and White Conversion**: Transform your image to grayscal.
-- **Blur Effect**: Apply a blur effect on the whole image.
+- **Image Ratio Modification**: Modifies the format ratio of your image. For example, if you insert a squared image, it can crop it to 4/5.
+- **Black and White Conversion**: Transform your image to grayscale.
+- **Blur Effect**: Apply a blur effect on the whole image or part of it. Blur strength can be adjusted.
 
 ## Installation
 
@@ -52,10 +55,12 @@ java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar <inputPath> <outputPath> <
 The application provides a command-line interface where you can choose the desired image processing options.
 
 ### Required parameters
+
 1. **input path** specifies which picture you want to modify
 2. **output path** specifies where you want to save the modified image and .bmp at the end of the filename.
 
 ### Available Options
+
 1. **grey**
 2. **blur**
 3. **crop**
@@ -63,10 +68,11 @@ The application provides a command-line interface where you can choose the desir
 Select the desired option by entering the corresponding name.
 
 ### Converting pictures to .bmp
-Some pictures were taken by ourselves and we used online converter to get pictures in .bmp. We also modified the resolution to make faster modification on them.  
+
+Some pictures were taken by ourselves and we used online converter to get pictures in .bmp. We also modified the
+resolution to make faster modification on them.  
 [Modify resolution](https://www.reduceimages.com/)  
 [Convert to bmp](https://convertio.co/fr/download/)
-
 
 ## Examples
 
@@ -76,6 +82,7 @@ Some pictures were taken by ourselves and we used online converter to get pictur
 ![Before Conversion](src/resources/pictures/golf_7r.bmp)
 
 **Used command**
+
 ````shell
 java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/golf_7r.bmp src/resources/pictures/golf_7r_5_4.bmp crop -f 5/4
 ````
@@ -89,6 +96,7 @@ java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/gol
 ![Before Black and White](src/resources/pictures/rosa_mir.bmp)
 
 **Used command**
+
 ````shell
 java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/rosa_mir.bmp src/resources/pictures/rosa_mir_grey.bmp grey
 
@@ -110,19 +118,26 @@ java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/ros
 Contributions are welcome! To contribute:
 
 1. Create an issue describing the feature you want to implement
-2. Fork the project and clone it 
+2. Fork the project and clone it
 3. Create your feature branch
+
 ````shell
 git checkout -b feature/my-feature
 ````
+
 4. Commit your changes
+
 ````shell
 git commit -m "Add my feature"
 ````
+
 5. Push the branch
+
 ```shell
 git push
 ```
+
 6. Open a Pull Request
 
-If you have any questions or suggestions, feel free to open an [issue](https://github.com/HEIG-VD-DAI-Iseni-Jacobs/pictures-cli-editor/issues) on GitHub.
+If you have any questions or suggestions, feel free to open
+an [issue](https://github.com/HEIG-VD-DAI-Iseni-Jacobs/pictures-cli-editor/issues) on GitHub.
