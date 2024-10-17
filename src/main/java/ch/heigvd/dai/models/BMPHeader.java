@@ -21,10 +21,18 @@ public class BMPHeader {
   private static final int DATA_OFFSET_INDEX = 10;
 
   /** The BITMAPFILEHEADER, a fixed-size header for BMP */
-  private final byte[] fileHeader = new byte[HEADER_LENGTH];
+  private byte[] fileHeader = new byte[HEADER_LENGTH];
 
   /** The BITMAPINFOHEADER, a variable-size header coming after the BITMAPFILEHEADER */
   private byte[] infoHeader;
+
+  BMPHeader() {}
+  ;
+
+  BMPHeader(byte[] fileHeader, byte[] infoHeader) {
+    this.fileHeader = fileHeader;
+    this.infoHeader = infoHeader;
+  }
 
   /**
    * Read a BMP header : both the fixed-size header and variable-size header
@@ -122,5 +130,45 @@ public class BMPHeader {
         | ((infoHeader[4 + 2] & 0xFF) << 16)
         | ((infoHeader[4 + 1] & 0xFF) << 8)
         | (infoHeader[4] & 0xFF);
+  }
+
+  /**
+   * Defines image height
+   *
+   * @param height new height
+   */
+  public void setImageHeight(int height) {
+    if (height <= 0) {
+      throw new RuntimeException("Image height must be positive.");
+    }
+
+    infoHeader[8] = (byte) (height & 0xFF);
+    infoHeader[9] = (byte) ((height >> 8) & 0xFF);
+    infoHeader[10] = (byte) ((height >> 16) & 0xFF);
+    infoHeader[11] = (byte) ((height >> 24) & 0xFF);
+  }
+
+  /**
+   * Defines image width
+   *
+   * @param width new width
+   */
+  public void setImageWidth(int width) {
+    if (width <= 0) {
+      throw new RuntimeException("Image width must be positive.");
+    }
+
+    infoHeader[4] = (byte) (width & 0xFF);
+    infoHeader[5] = (byte) ((width >> 8) & 0xFF);
+    infoHeader[6] = (byte) ((width >> 16) & 0xFF);
+    infoHeader[7] = (byte) ((width >> 24) & 0xFF);
+  }
+
+  @Override
+  public BMPHeader clone() {
+    byte[] clonedFileHeader = fileHeader.clone();
+    byte[] clonedInfoHeader = infoHeader.clone();
+
+    return new BMPHeader(clonedFileHeader, clonedInfoHeader);
   }
 }
