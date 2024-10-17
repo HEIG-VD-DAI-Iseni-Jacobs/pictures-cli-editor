@@ -6,6 +6,15 @@ public class Pixel {
   private int green;
   private int blue;
 
+  public static void main(String[] args) {
+    Pixel pixel = new Pixel(0, 0, 0);
+    pixel.add(new Pixel(1500, 2, 1));
+    pixel.div(2);
+    System.out.println(pixel.getRed());
+    System.out.println(pixel.getGreen());
+    System.out.println(pixel.getBlue());
+  }
+
   public Pixel(int red, int green, int blue) {
     this.red = red;
     this.green = green;
@@ -34,5 +43,31 @@ public class Pixel {
 
   public void setBlue(int blue) {
     this.blue = blue;
+  }
+
+  /**
+   * Adds the color components of another pixel to the current pixel.
+   *
+   * @param other the pixel whose color components are to be added to the current pixel
+   */
+  public Pixel add(Pixel other) {
+    this.red += other.red;
+    this.blue += other.blue;
+    this.green += other.green;
+
+    return this;
+  }
+
+  /**
+   * Divides the pixel's color components by a given value.
+   *
+   * @param val the value to divide the pixel's color components by
+   */
+  public Pixel div(int val) {
+    this.red /= val;
+    this.green /= val;
+    this.blue /= val;
+
+    return this;
   }
 }
