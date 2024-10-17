@@ -27,6 +27,7 @@ processing features.
 - **Java JDK 21**
 - **Maven** for dependency management and building the project
 - **Git** for cloning the repository
+- **IntelliJ IDEA** (optional) for easier setup
 
 ### Clone the Repository
 
@@ -36,7 +37,13 @@ Open your terminal and run the following command to clone the repository:
 git clone https://github.com/HEIG-VD-DAI-Iseni-Jacobs/pictures-cli-editor.git
 ```
 
-### Build the Project
+### Build and run
+
+<details>
+<summary>Using the Terminal</summary>
+<br>
+
+#### Build the Project
 
 Navigate to the cloned project directory and use Maven to build the application:
 
@@ -45,7 +52,7 @@ cd pictures-cli-editor
 mvn spotless:apply dependency:go-offline clean compile package
 ```
 
-## Usage
+#### Usage
 
 Once the project is built, you can run the application using the following command:
 
@@ -55,22 +62,40 @@ java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar <inputPath> <outputPath> <
 
 The application provides a command-line interface where you can choose the desired image processing options.
 
-### Required parameter
+#### Required parameter
 
 1. **input path** specifies which picture you want to modify
 
-### Optional parameter
+#### Optional parameter
 
 1. **output path** specifies where you want to save the modified image. If not provided, the input path will be used
    and "_edited" will be appended to the file name before the extension. The output file will always be in .bmp format.
 
-### Available Commands
+#### Available Commands
 
 1. **grey**
 2. **blur**
 3. **crop**
 
 Select the desired option by entering the corresponding name.
+</details>
+
+<details open>
+<summary>Using IntelliJ IDEA</summary>
+<br>
+
+#### Build
+
+In the "Run" tab, select `Package application as JAR file` and run it.
+
+#### Run
+
+In the "Run" tab, select `Run the application` and run it.
+By default, no parameters are given so the help message will display.
+Feel free to update the run config or launch the app from the terminal to add your parameters !
+For more details on the commands see Available Commands.
+
+</details>
 
 ### Converting pictures to .bmp
 
