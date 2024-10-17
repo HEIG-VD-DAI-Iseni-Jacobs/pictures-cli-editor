@@ -29,7 +29,7 @@ public class Root {
     if (outputPath == null) {
       int dotIndex = inputPath.lastIndexOf('.');
       // Insert "bis" before file extension
-      outputPath = inputPath.substring(0, dotIndex) + "bis" + inputPath.substring(dotIndex);
+      outputPath = inputPath.substring(0, dotIndex) + "_edited" + inputPath.substring(dotIndex);
     }
     return outputPath;
   }
