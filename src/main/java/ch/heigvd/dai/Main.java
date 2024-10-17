@@ -1,11 +1,26 @@
 package ch.heigvd.dai;
 
-import ch.heigvd.dai.models.BMPImage;
+import ch.heigvd.dai.commands.Root;
+import java.io.File;
+import picocli.CommandLine;
 
 public class Main {
+
   public static void main(String[] args) {
-    BMPImage a = new BMPImage(args[0], args[1]);
-    a.readImage();
-    a.writeImage();
+    // Define command name - source: https://stackoverflow.com/a/11159435
+    String jarFilename =
+        new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath())
+            .getName();
+
+    // Create root command
+    Root root = new Root();
+
+    int exitCode =
+        new CommandLine(root)
+            .setCommandName(jarFilename)
+            .setCaseInsensitiveEnumValuesAllowed(true)
+            .execute(args);
+
+    System.exit(exitCode);
   }
 }
