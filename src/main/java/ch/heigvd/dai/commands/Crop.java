@@ -57,12 +57,9 @@ public class Crop implements Callable<Integer> {
     } else {
       // crop width
       int newWidth = (int) (image.getHeight() * desiredRatio);
-      System.out.println("newWidth: " + newWidth);
       desiredHeader.setImageWidth(newWidth);
-      System.out.println("desiredHeader width: " + desiredHeader.getImageWidth());
       desiredImage = new BMPImage(parent.getInputPath(), parent.getOutputPath(), desiredHeader);
       int deltaWidth = (image.getWidth() - newWidth) / 2;
-      System.out.println("deltaWidth: " + deltaWidth);
       for (int i = 0; i < newWidth; i++) {
         for (int j = 0; j < image.getHeight(); j++) {
           desiredImage.setPixel(i, j, image.getPixel(i + deltaWidth, j));
