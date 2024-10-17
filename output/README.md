@@ -1,0 +1,1 @@
+Here you'll find the examples generated using the pre-saved configs for IntelliJ

@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="1. Garden grey" type="Application" factoryName="Application" folderName="Run examples">
+    <option name="MAIN_CLASS_NAME" value="ch.heigvd.dai.Main" />
+    <module name="pictures-cli-editor" />
+    <option name="PROGRAM_PARAMETERS" value="./src/resources/pictures/rosa_mir.bmp ./output/rosa_mir_grey.bmp grey " />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
