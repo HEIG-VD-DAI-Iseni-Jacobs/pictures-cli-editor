@@ -133,9 +133,9 @@ public class BMPHeader {
   }
 
   /**
-   * Définir la hauteur de l'image dans le header
+   * Defines image height
    *
-   * @param height Nouvelle hauteur de l'image
+   * @param height new height
    */
   public void setImageHeight(int height) {
     if (height <= 0) {
@@ -149,9 +149,9 @@ public class BMPHeader {
   }
 
   /**
-   * Définir la largeur de l'image dans le header
+   * Defines image width
    *
-   * @param width Nouvelle largeur de l'image
+   * @param width new width
    */
   public void setImageWidth(int width) {
     if (width <= 0) {
@@ -166,11 +166,9 @@ public class BMPHeader {
 
   @Override
   public BMPHeader clone() {
-    // Créez des copies des tableaux pour assurer l'indépendance entre l'original et la copie
     byte[] clonedFileHeader = fileHeader.clone();
     byte[] clonedInfoHeader = infoHeader.clone();
 
-    // Retournez une nouvelle instance de BMPHeader avec les tableaux clonés
     return new BMPHeader(clonedFileHeader, clonedInfoHeader);
   }
 }

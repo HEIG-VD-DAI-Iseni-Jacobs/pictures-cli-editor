@@ -1,12 +1,13 @@
 package ch.heigvd.dai.models;
 
+/** Used to manipulate image ratios like 9/16 */
 public class ImageRatio {
-  private int widthRatio;
-  private int heightRatio;
+  private final int widthRatio;
+  private final int heightRatio;
 
   public ImageRatio(int widthRatio, int heightRatio) {
     if (widthRatio <= 0 || heightRatio <= 0) {
-      throw new IllegalArgumentException("Les valeurs de ratio doivent être positives.");
+      throw new IllegalArgumentException("Ratio values must be positive.");
     }
     this.widthRatio = widthRatio;
     this.heightRatio = heightRatio;

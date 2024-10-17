@@ -11,6 +11,7 @@ import picocli.CommandLine;
 public class Crop implements Callable<Integer> {
   @CommandLine.ParentCommand protected Root parent;
 
+  // Additional option for this command
   @CommandLine.Option(
       names = {"-f", "--format"},
       description = "Le format de découpage sous la forme WIDTH/HEIGHT, par exemple 16/9 ou 4/5",
@@ -27,9 +28,7 @@ public class Crop implements Callable<Integer> {
             + parent.getOutputPath());
 
     int widthRatio = imageRatio.getWidthRatio();
-    System.out.println("widthRatio = " + widthRatio);
     int heightRatio = imageRatio.getHeightRatio();
-    System.out.println("heightRatio = " + heightRatio);
 
     BMPImage image = new BMPImage(parent.getInputPath(), parent.getOutputPath());
     BMPImage desiredImage;
@@ -37,21 +36,18 @@ public class Crop implements Callable<Integer> {
 
     // Write the header
     BMPHeader originalHeader = image.getHeader();
-    BMPHeader desiredHeader = (BMPHeader) originalHeader.clone();
+    BMPHeader desiredHeader = originalHeader.clone();
 
     double originalRatio = (double) image.getWidth() / image.getHeight();
-    System.out.println("originalRatio = " + originalRatio);
     double desiredRatio = (double) widthRatio / heightRatio;
-    System.out.println("desiredRatio = " + desiredRatio);
 
     // Check if we need to crop in width or height
     if (desiredRatio > originalRatio) {
+      // crop height
       int newHeight = (int) (image.getWidth() / desiredRatio);
-      System.out.println("newHeight = " + newHeight);
       desiredHeader.setImageHeight(newHeight);
       desiredImage = new BMPImage(parent.getInputPath(), parent.getOutputPath(), desiredHeader);
       int deltaHeight = (image.getHeight() - newHeight) / 2;
-      System.out.println("deltaHeight = " + deltaHeight);
       // create croped image
       for (int i = 0; i < image.getWidth(); i++) {
         for (int j = 0; j < newHeight; j++) {
@@ -61,9 +57,12 @@ public class Crop implements Callable<Integer> {
     } else {
       // crop width
       int newWidth = (int) (image.getHeight() * desiredRatio);
+      System.out.println("newWidth: " + newWidth);
       desiredHeader.setImageWidth(newWidth);
-      desiredImage = new BMPImage(parent.getInputPath(), parent.getOutputPath());
+      System.out.println("desiredHeader width: " + desiredHeader.getImageWidth());
+      desiredImage = new BMPImage(parent.getInputPath(), parent.getOutputPath(), desiredHeader);
       int deltaWidth = (image.getWidth() - newWidth) / 2;
+      System.out.println("deltaWidth: " + deltaWidth);
       for (int i = 0; i < newWidth; i++) {
         for (int j = 0; j < image.getHeight(); j++) {
           desiredImage.setPixel(i, j, image.getPixel(i + deltaWidth, j));
