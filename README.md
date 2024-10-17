@@ -137,8 +137,8 @@ java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/ros
 
 ### Image Blurring
 
-| **Before:**                                     | **After:**                                      |
-|-------------------------------------------------|-------------------------------------------------|
+| **Before:**                                     | **After:**                                        |
+|-------------------------------------------------|---------------------------------------------------|
 | ![Before Blur](src/resources/pictures/bird.bmp) | ![After Blur](output_examples/bird_blurred.bmp) |
 
 **Used command**
@@ -146,12 +146,6 @@ java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/ros
 ````shell
 java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar ./src/resources/pictures/bird.bmp ./output_examples.bmp blur -r 10 --x1 550 --y1 700 --x2 750 --y2 900
 ````
-
-## Limitations
-
-We are aware of a few problems. Here's a list of what we're working on at the moment:
-
-- When cropping an image to a ratio that's smaller than it's original ratio, the program crashes
 
 ## Contributing
 
