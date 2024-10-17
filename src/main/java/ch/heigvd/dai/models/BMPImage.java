@@ -81,6 +81,12 @@ public class BMPImage {
           bos.write(pixel.getGreen());
           bos.write(pixel.getRed());
         }
+        // Add padding to alin rows on multiple of 4
+        if (width * 3 % 4 != 0) {
+          for (int i = 0; i < 4 - (width * 3 % 4); i++) {
+            bos.write(0);
+          }
+        }
       }
       bos.flush(); // Ensure pixels are written
 
