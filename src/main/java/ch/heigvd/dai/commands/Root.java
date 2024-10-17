@@ -28,7 +28,7 @@ public class Root {
     // If outputPath is null, we add "bis" to inputPath
     if (outputPath == null) {
       int dotIndex = inputPath.lastIndexOf('.');
-      // Insert "bis" before file extension
+      // Insert "_edited" before file extension
       outputPath = inputPath.substring(0, dotIndex) + "_edited" + inputPath.substring(dotIndex);
     }
     return outputPath;
