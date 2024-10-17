@@ -2,14 +2,12 @@ package ch.heigvd.dai.commands;
 
 import ch.heigvd.dai.models.BMPImage;
 import ch.heigvd.dai.models.Pixel;
-import picocli.CommandLine;
-
 import java.util.concurrent.Callable;
+import picocli.CommandLine;
 
 @CommandLine.Command(name = "blur", description = "Blur a picture or part of it")
 public class Blur implements Callable<Integer> {
-  @CommandLine.ParentCommand
-  protected Root parent;
+  @CommandLine.ParentCommand protected Root parent;
 
   @Override
   public Integer call() {
