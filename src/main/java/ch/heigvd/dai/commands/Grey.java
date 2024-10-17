@@ -12,14 +12,19 @@ public class Grey implements Callable<Integer> {
   @Override
   public Integer call() {
 
+    BMPImage image = new BMPImage(parent.getInputPath(), parent.getOutputPath());
+    try {
+      image.readImage();
+    } catch (RuntimeException e) {
+      return 1;
+    }
+
     System.out.println(
         "Converting "
             + parent.getInputPath()
             + " to a black and white picture located at "
             + parent.getOutputPath());
 
-    BMPImage image = new BMPImage(parent.getInputPath(), parent.getOutputPath());
-    image.readImage();
     Pixel[][] pixels = image.getImage();
     /**
      * Turns each pixel to grey by applying the same coefficient on each color. Formula:
@@ -34,7 +39,12 @@ public class Grey implements Callable<Integer> {
         pixel.setBlue(grey);
       }
     }
-    image.writeImage();
+
+    try {
+      image.writeImage();
+    } catch (RuntimeException e) {
+      return 1;
+    }
 
     return 0;
   }

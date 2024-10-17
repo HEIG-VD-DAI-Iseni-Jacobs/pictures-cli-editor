@@ -34,8 +34,12 @@ public class BMPImage {
     this.header = header;
   }
 
-  /** Reads an image from the specified input path. */
-  public void readImage() {
+  /**
+   * Reads an image from the specified input path.
+   *
+   * @throws RuntimeException when reading or opening error occured
+   */
+  public void readImage() throws RuntimeException {
     try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputPath))) {
       header = new BMPHeader();
       header.readHeader(bis);
@@ -59,13 +63,15 @@ public class BMPImage {
 
     } catch (IOException e) {
       System.err.println("[e] Error reading image: '" + e.getMessage() + "'");
+      throw new RuntimeException(e);
     } catch (RuntimeException e) {
       System.err.println("[e] Invalid values: '" + e.getMessage() + "'");
+      throw new RuntimeException(e);
     }
   }
 
   /** Writes the image to the specified output path. */
-  public void writeImage() {
+  public void writeImage() throws RuntimeException {
     try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputPath))) {
       int width = header.getImageWidth();
       int height = header.getImageHeight();
@@ -92,6 +98,7 @@ public class BMPImage {
 
     } catch (IOException e) {
       System.err.println("[e] Error writing image: " + outputPath);
+      throw new RuntimeException(e);
     }
   }
 
