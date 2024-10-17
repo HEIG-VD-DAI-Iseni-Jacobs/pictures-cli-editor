@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="2. Garden grey crop" type="Application" factoryName="Application" folderName="Run examples">
+    <option name="MAIN_CLASS_NAME" value="ch.heigvd.dai.Main" />
+    <module name="pictures-cli-editor" />
+    <option name="PROGRAM_PARAMETERS" value="./output/rosa_mir_grey.bmp ./output/rosa_mir_grey_cropped.bmp crop -f 16/9" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

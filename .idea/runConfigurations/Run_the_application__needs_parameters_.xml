@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run the application" type="Application" factoryName="Application">
+  <configuration default="false" name="Run the application (needs parameters)" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="ch.heigvd.dai.Main" />
     <module name="pictures-cli-editor" />
     <method v="2">

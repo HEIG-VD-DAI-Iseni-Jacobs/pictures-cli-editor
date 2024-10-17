@@ -90,7 +90,7 @@ In the "Run" tab, select `Package application as JAR file` and run it.
 
 #### Run
 
-In the "Run" tab, select `Run the application` and run it.
+In the "Run" tab, select `Run the application (needs parameters)` or other configs and run it.
 By default, no parameters are given so the help message will display.
 Feel free to update the run config or launch the app from the terminal to add your parameters !
 For more details on the commands see Available Commands.
