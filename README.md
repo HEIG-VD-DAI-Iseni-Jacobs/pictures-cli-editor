@@ -9,7 +9,6 @@ Welcome to the **Image Processing Application** project, developed as part of th
 - [Usage](#usage)
 - [Examples](#examples)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -47,7 +46,7 @@ mvn clean && mvn spotless:apply && mvn dependency:go-offline && mvn package
 Once the project is built, you can run the application using the following command:
 
 ```bash
-java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar
+java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar <inputPath> <outputPath> <command>
 ```
 
 The application provides a command-line interface where you can choose the desired image processing options.
@@ -76,10 +75,16 @@ Select the desired option by entering the corresponding name.
 ### Black and White Conversion
 
 **Before:**
-![Before Black and White](src/resources/pictures/input.bmp)
+![Before Black and White](src/resources/pictures/rosa_mir.bmp)
+
+**Used command**
+````shell
+java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/rosa_mir.bmp src/resources/pictures/rosa_mir_grey.bmp grey
+
+````
 
 **After:**
-![After Black and White](src/resources/pictures/input_grey.bmp)
+![After Black and White](src/resources/pictures/rosa_mir_grey.bmp)
 
 ### Image Blurring
 
@@ -93,22 +98,20 @@ Select the desired option by entering the corresponding name.
 
 Contributions are welcome! To contribute:
 
-1. Fork the project
-2. Create your feature branch
+1. Create an issue describing the feature you want to implement
+2. Fork the project and clone it 
+3. Create your feature branch
 ````shell
 git checkout -b feature/my-feature
 ````
-3. Commit your changes
+4. Commit your changes
 ````shell
 git commit -m "Add my feature"
 ````
-4. Push the branch (`git push origin feature/my-feature`)
-5. Open a Pull Request
+5. Push the branch
+```shell
+git push
+```
+6. Open a Pull Request
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-If you have any questions or suggestions, feel free to open an [issue](https://github.com/your-username/image-processing-app/issues) on GitHub.
+If you have any questions or suggestions, feel free to open an [issue](https://github.com/HEIG-VD-DAI-Iseni-Jacobs/pictures-cli-editor/issues) on GitHub.
