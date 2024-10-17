@@ -123,4 +123,8 @@ public class BMPHeader {
         | ((infoHeader[4 + 1] & 0xFF) << 8)
         | (infoHeader[4] & 0xFF);
   }
+
+  public Object clone() throws CloneNotSupportedException {
+    return super.clone();
+  }
 }

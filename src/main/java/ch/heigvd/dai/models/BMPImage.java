@@ -75,4 +75,16 @@ public class BMPImage {
       System.err.println("[e] Error writing image: " + outputPath);
     }
   }
+
+  public int getWidth() {
+    return header.getImageWidth();
+  }
+
+  public int getHeight() {
+    return header.getImageHeight();
+  }
+
+  public BMPHeader getHeader() {
+    return header;
+  }
 }
