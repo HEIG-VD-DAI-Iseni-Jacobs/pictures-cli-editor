@@ -62,35 +62,40 @@ The application provides a command-line interface where you can choose the desir
 
 Select the desired option by entering the corresponding name.
 
+### Converting pictures to .bmp
+Some pictures were taken by ourselves and we used online converter to get pictures in .bmp. We also modified the resolution to make faster modification on them.  
+[Modify resolution](https://www.reduceimages.com/)  
+[Convert to bmp](https://convertio.co/fr/download/)
+
+
 ## Examples
 
 ### Format Conversion
 
 **Before:**
-![Before Conversion](src/resources/pictures/rosa_mir.bmp)
+![Before Conversion](src/resources/pictures/golf_7r.bmp)
 
 **Used command**
 ````shell
-java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/rosa_mir.bmp src/resources/pictures/rosa_mir_16_9.bmp crop -f 16/9
-
+java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/golf_7r.bmp src/resources/pictures/golf_7r_5_4.bmp crop -f 5/4
 ````
 
 **After:**
-![After Conversion](src/resources/pictures/rosa_mir_16_9.bmp)
+![After Conversion](src/resources/pictures/golf_7r_5_4.bmp)
 
 ### Black and White Conversion
 
 **Before:**
-![Before Black and White](src/resources/pictures/bato.bmp)
+![Before Black and White](src/resources/pictures/rosa_mir.bmp)
 
 **Used command**
 ````shell
-java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/bato.bmp src/resources/pictures/bato_grey.bmp grey
+java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/rosa_mir.bmp src/resources/pictures/rosa_mir_grey.bmp grey
 
 ````
 
 **After:**
-![After Black and White](src/resources/pictures/bato_grey.bmp)
+![After Black and White](src/resources/pictures/rosa_mir_grey.bmp)
 
 ### Image Blurring
 
