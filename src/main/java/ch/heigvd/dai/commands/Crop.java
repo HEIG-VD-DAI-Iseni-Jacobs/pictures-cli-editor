@@ -32,7 +32,12 @@ public class Crop implements Callable<Integer> {
 
     BMPImage image = new BMPImage(parent.getInputPath(), parent.getOutputPath());
     BMPImage desiredImage;
-    image.readImage();
+
+    try {
+      image.readImage();
+    } catch (RuntimeException e) {
+      return 1;
+    }
 
     // Write the header
     BMPHeader originalHeader = image.getHeader();
@@ -66,7 +71,12 @@ public class Crop implements Callable<Integer> {
         }
       }
     }
-    desiredImage.writeImage();
+
+    try {
+      desiredImage.writeImage();
+    } catch (RuntimeException e) {
+      return 1;
+    }
 
     return 0;
   }

@@ -52,7 +52,12 @@ public class Blur implements Callable<Integer> {
   @Override
   public Integer call() {
     BMPImage image = new BMPImage(parent.getInputPath(), parent.getOutputPath());
-    image.readImage();
+
+    try {
+      image.readImage();
+    } catch (RuntimeException e) {
+      return 1;
+    }
 
     int imageWidth = image.getWidth();
     int imageHeight = image.getHeight();
@@ -102,7 +107,11 @@ public class Blur implements Callable<Integer> {
       }
     }
 
-    image.writeImage();
+    try {
+      image.writeImage();
+    } catch (RuntimeException e) {
+      return 1;
+    }
 
     return 0;
   }
