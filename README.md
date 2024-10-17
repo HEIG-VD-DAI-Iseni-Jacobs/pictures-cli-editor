@@ -68,18 +68,18 @@ Select the desired option by entering the corresponding name.
 ### Format Conversion
 
 **Before:**
-![Before Conversion]()
+![Before Conversion](src/resources/pictures/input.bmp)
 
 **After:**
-![After Conversion](examples/after_conversion.png)
+![After Conversion](src/resources/pictures/input_16_9.bmp)
 
 ### Black and White Conversion
 
 **Before:**
-![Before Black and White](src/resources/pictures/IMG_0364.bmp)
+![Before Black and White](src/resources/pictures/input.bmp)
 
 **After:**
-![After Black and White](src/resources/pictures/IMG_0364_grey.bmp)
+![After Black and White](src/resources/pictures/input_grey.bmp)
 
 ### Image Blurring
 
@@ -94,8 +94,14 @@ Select the desired option by entering the corresponding name.
 Contributions are welcome! To contribute:
 
 1. Fork the project
-2. Create your feature branch (`git checkout -b feature/my-feature`)
-3. Commit your changes (`git commit -m 'Add my feature'`)
+2. Create your feature branch
+````shell
+git checkout -b feature/my-feature
+````
+3. Commit your changes
+````shell
+git commit -m "Add my feature"
+````
 4. Push the branch (`git push origin feature/my-feature`)
 5. Open a Pull Request
 
