@@ -67,24 +67,30 @@ Select the desired option by entering the corresponding name.
 ### Format Conversion
 
 **Before:**
-![Before Conversion](src/resources/pictures/input.bmp)
-
-**After:**
-![After Conversion](src/resources/pictures/input_16_9.bmp)
-
-### Black and White Conversion
-
-**Before:**
-![Before Black and White](src/resources/pictures/rosa_mir.bmp)
+![Before Conversion](src/resources/pictures/rosa_mir.bmp)
 
 **Used command**
 ````shell
-java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/rosa_mir.bmp src/resources/pictures/rosa_mir_grey.bmp grey
+java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/rosa_mir.bmp src/resources/pictures/rosa_mir_16_9.bmp crop -f 16/9
 
 ````
 
 **After:**
-![After Black and White](src/resources/pictures/rosa_mir_grey.bmp)
+![After Conversion](src/resources/pictures/rosa_mir_16_9.bmp)
+
+### Black and White Conversion
+
+**Before:**
+![Before Black and White](src/resources/pictures/bato.bmp)
+
+**Used command**
+````shell
+java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/bato.bmp src/resources/pictures/bato_grey.bmp grey
+
+````
+
+**After:**
+![After Black and White](src/resources/pictures/bato_grey.bmp)
 
 ### Image Blurring
 
