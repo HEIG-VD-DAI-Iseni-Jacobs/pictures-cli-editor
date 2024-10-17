@@ -21,6 +21,19 @@ public class BMPImage {
     this.outputPath = outputPath;
   }
 
+  /**
+   * Constructs a BMPImage with specified input and output paths and a header
+   *
+   * @param inputPath the path of the image file to load
+   * @param outputPath the path where the processed image will be saved
+   * @param header the header that the image will have
+   */
+  public BMPImage(String inputPath, String outputPath, BMPHeader header) {
+    this(inputPath, outputPath);
+    this.image = new Pixel[header.getImageWidth()][header.getImageHeight()];
+    this.header = header;
+  }
+
   /** Reads an image from the specified input path. */
   public void readImage() {
     try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputPath))) {
@@ -74,6 +87,26 @@ public class BMPImage {
     } catch (IOException e) {
       System.err.println("[e] Error writing image: " + outputPath);
     }
+  }
+
+  public int getWidth() {
+    return header.getImageWidth();
+  }
+
+  public int getHeight() {
+    return header.getImageHeight();
+  }
+
+  public Pixel getPixel(int x, int y) {
+    return image[x][y];
+  }
+
+  public void setPixel(int x, int y, Pixel pixel) {
+    image[x][y] = pixel;
+  }
+
+  public BMPHeader getHeader() {
+    return header;
   }
 
   public Pixel[][] getImage() {
