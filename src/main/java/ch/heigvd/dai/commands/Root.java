@@ -9,11 +9,15 @@ import picocli.CommandLine;
     scope = CommandLine.ScopeType.INHERIT,
     mixinStandardHelpOptions = true)
 public class Root {
+
   @CommandLine.Parameters(index = "0", description = "The path to the input file.")
   protected String inputPath;
 
-  // TODO : make optional ? If omitted, original picture would be replaced ?
-  @CommandLine.Parameters(index = "1", description = "The desired path for the output file.")
+  // Make outputPath optional with arity = "0..1"
+  @CommandLine.Parameters(
+      index = "1",
+      description = "The desired path for the output file.",
+      arity = "0..1")
   protected String outputPath;
 
   public String getInputPath() {
@@ -21,6 +25,12 @@ public class Root {
   }
 
   public String getOutputPath() {
+    // If outputPath is null, we add "bis" to inputPath
+    if (outputPath == null) {
+      int dotIndex = inputPath.lastIndexOf('.');
+      // Insert "bis" before file extension
+      outputPath = inputPath.substring(0, dotIndex) + "bis" + inputPath.substring(dotIndex);
+    }
     return outputPath;
   }
 }
