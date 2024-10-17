@@ -41,7 +41,7 @@ Navigate to the cloned project directory and use Maven to build the application:
 
 ```bash
 cd pictures-cli-editor
-mvn clean && mvn spotless:apply && mvn dependency:go-offline && mvn package
+mvn spotless:apply dependency:go-offline clean compile package
 ```
 
 ## Usage
