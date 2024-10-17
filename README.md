@@ -74,49 +74,53 @@ Select the desired option by entering the corresponding name.
 
 ### Converting pictures to .bmp
 
-Some pictures were taken by ourselves and we used online converter to get pictures in .bmp. We also modified the
-resolution to make faster modification on them.  
-[Modify resolution](https://www.reduceimages.com/)  
-[Convert to bmp](https://convertio.co/fr/download/)
+The pictures were taken by ourselves. We had to convert them to bmp and reduce their size as bmp is not optimised and
+takes
+much space. For this purpose, two options are possible:
+
+- Use online converters such as [convertio](https://convertio.co/fr/download/)
+  and [reduceimages](https://www.reduceimages.com/)
+- Use [magick](https://imagemagick.org/index.php), a dedicated CLI software. Here's the command used :  
+  `magick mogrify -resize 1080x1620 -depth 8 -format bmp *.jpg`
 
 ## Examples
 
-### Format Conversion
+### Cropping
 
-**Before:**
-![Before Conversion](src/resources/pictures/golf_7r.bmp)
+| **Before:**                                              | **After:**                                           |
+|----------------------------------------------------------|------------------------------------------------------|
+| ![Before Conversion](src/resources/pictures/golf_7r.bmp) | ![After Conversion](output_examples/golf_7r_5_4.bmp) |
 
 **Used command**
 
 ````shell
-java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/golf_7r.bmp src/resources/pictures/golf_7r_5_4.bmp crop -f 5/4
+java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/golf_7r.bmp output_examples/golf_7r_5_4.bmp crop -f 5/4
 ````
-
-**After:**
-![After Conversion](src/resources/pictures/golf_7r_5_4.bmp)
 
 ### Black and White Conversion
 
-**Before:**
-![Before Black and White](src/resources/pictures/rosa_mir.bmp)
+| **Before:**                                                    | **After:**                                                  |
+|----------------------------------------------------------------|-------------------------------------------------------------|
+| ![Before Black and White](src/resources/pictures/rosa_mir.bmp) | ![After Black and White](output_examples/rosa_mir_grey.bmp) |
 
 **Used command**
 
 ````shell
-java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/rosa_mir.bmp src/resources/pictures/rosa_mir_grey.bmp grey
+java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar src/resources/pictures/rosa_mir.bmp output_examples/rosa_mir_grey.bmp grey
 
 ````
 
-**After:**
-![After Black and White](src/resources/pictures/rosa_mir_grey.bmp)
-
 ### Image Blurring
 
-**Before:**
-![Before Blur](examples/before_blur.jpg)
+| **Before:**                                     | **After:**                                      |
+|-------------------------------------------------|-------------------------------------------------|
+| ![Before Blur](src/resources/pictures/bird.bmp) | ![After Blur](output_examples/bird_blurred.bmp) |
 
-**After:**
-![After Blur](examples/after_blur.jpg)
+## Limitations
+
+We are aware of a few problems. Here's a list of what we're working on at the moment:
+
+- When cropping an image to a ratio that's smaller than it's original ratio, the program crashes
 
 ## Contributing
 
