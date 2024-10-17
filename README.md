@@ -15,7 +15,8 @@ processing features.
 
 ## Features
 
-- **Image Ratio Modification**: Modifies the format ratio of your image. For example, if you insert a squared image, it can crop it to 4/5.
+- **Image Ratio Modification**: Modifies the format ratio of your image. For example, if you insert a squared image, it
+  can crop it to 4/5.
 - **Black and White Conversion**: Transform your image to grayscale.
 - **Blur Effect**: Apply a blur effect on the whole image or part of it. Blur strength can be adjusted.
 
@@ -54,12 +55,16 @@ java -jar target/pictures-cli-editor-1.0-SNAPSHOT.jar <inputPath> <outputPath> <
 
 The application provides a command-line interface where you can choose the desired image processing options.
 
-### Required parameters
+### Required parameter
 
 1. **input path** specifies which picture you want to modify
-2. **output path** specifies where you want to save the modified image and .bmp at the end of the filename.
 
-### Available Options
+### Optional parameter
+
+1. **output path** specifies where you want to save the modified image. If not provided, the input path will be used
+   and "_edited" will be appended to the file name before the extension. The output file will always be in .bmp format.
+
+### Available Commands
 
 1. **grey**
 2. **blur**
