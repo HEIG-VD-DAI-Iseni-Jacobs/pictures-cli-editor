@@ -108,4 +108,8 @@ public class BMPImage {
   public BMPHeader getHeader() {
     return header;
   }
+
+  public Pixel[][] getImage() {
+    return image;
+  }
 }
