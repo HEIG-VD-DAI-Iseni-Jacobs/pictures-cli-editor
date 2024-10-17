@@ -38,15 +38,14 @@ public class Blur implements Callable<Integer> {
 
     // Copy the pixels to operate safely on them in the image
     Pixel[][] imagePixels = image.getImage();
-    Pixel[][] originalPixels = new Pixel[imagePixels.length][imagePixels[0].length];
-    // TODO : replace above with image.getWidth when merged with Aladin's PR
-    for (int i = 0; i < imagePixels.length; i++) {
+    Pixel[][] originalPixels = new Pixel[image.getWidth()][image.getHeight()];
+    for (int i = 0; i < image.getWidth(); i++) {
       originalPixels[i] = imagePixels[i].clone();
     }
 
     // For each pixel, compute its neighbors average and set its value to it
-    for (int y = 0; y < imagePixels.length; y++) {
-      for (int x = 0; x < imagePixels[0].length; x++) {
+    for (int y = 0; y < image.getWidth(); y++) {
+      for (int x = 0; x < image.getHeight(); x++) {
         imagePixels[y][x] = computeAverageColor(originalPixels, x, y);
       }
     }
